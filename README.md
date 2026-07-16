@@ -37,40 +37,6 @@ This project provides a complete user authentication system including registrati
 - ✅ Automated emails using Nodemailer
 - ✅ Email templates generated with Mailgen
 
----
-
-# 🏗️ Architecture
-├── Client (React.js)
-│
-│ ├── Components
-│ │ ├── Login
-│ │ ├── Register
-│ │ ├── Profile
-│ │ ├── Password Reset
-│ │ └── Recovery
-│ │
-│ ├── React Router
-│ ├── Axios API Requests
-│ ├── Formik Validation
-│ └── Zustand State Management
-│
-│
-└── Server (Node.js + Express.js)
-  ├── Controllers
-  │
-  ├── Routes
-  │
-  ├── Middleware
-  │
-  ├── Models
-  │
-  ├── JWT Authentication
-  │
-  ├── MongoDB Database
-  │
-  └── Nodemailer Service
-
----
 
 # 🛠️ Technologies Used
 
