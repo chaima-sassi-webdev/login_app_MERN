@@ -66,8 +66,12 @@ This project provides a complete user authentication system including registrati
 ---
 
 # 📂 Project Structure
-<img width="568" height="346" alt="Capture d’écran du 2026-07-16 10-53-11" src="https://github.com/user-attachments/assets/c61df55c-a4d2-4996-855c-923e223db421" />
-<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-52-08" src="https://github.com/user-attachments/assets/66cd403f-54be-479b-80d6-53bac2c6932e" />
-<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-51-21" src="https://github.com/user-attachments/assets/614c17c5-dce8-4511-b568-a44cf3a4562e" />
-<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-48-02" src="https://github.com/user-attachments/assets/bbbd00d1-d119-4a4d-8c74-7d8c50e209b8" />
 <img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-36-50" src="https://github.com/user-attachments/assets/11af9435-03e5-4006-b481-6bdcb1e097fa" />
+<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-48-02" src="https://github.com/user-attachments/assets/bbbd00d1-d119-4a4d-8c74-7d8c50e209b8" />
+<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-51-21" src="https://github.com/user-attachments/assets/614c17c5-dce8-4511-b568-a44cf3a4562e" />
+<img width="1678" height="1064" alt="Capture d’écran du 2026-07-16 10-52-08" src="https://github.com/user-attachments/assets/66cd403f-54be-479b-80d6-53bac2c6932e" />
+<img width="568" height="346" alt="Capture d’écran du 2026-07-16 10-53-11" src="https://github.com/user-attachments/assets/c61df55c-a4d2-4996-855c-923e223db421" />
+
+
+
+
