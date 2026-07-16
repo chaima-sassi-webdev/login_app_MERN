@@ -1,6 +1,5 @@
 import UserModel from "../model/User.model.js";
 import bcrypt from 'bcrypt' ;
-import ENV from '../config.js';
 import jwt from 'jsonwebtoken';
 import otpGenerator from 'otp-generator';
 
@@ -36,60 +35,63 @@ export async function verifyUser(req, res, next){
 export async function register(req,res){
 
     try {
-        const { username, password, profile, email } = req.body;        
 
-        // check the existing user
-        const existUsername = new Promise((resolve, reject) => {
-            UserModel.findOne({ username }, function(err, user){
-                if(err) reject(new Error(err))
-                if(user) reject({ error : "Please use unique username"});
+        const { username, password, email } = req.body;
 
-                resolve();
-            })
+
+        if(!username || !password || !email){
+            return res.status(400).json({
+                error:"Missing data"
+            });
+        }
+
+
+        const existUsername = await UserModel.findOne({username});
+
+        if(existUsername){
+            return res.status(400).json({
+                error:"Username already exists"
+            });
+        }
+
+
+        const existEmail = await UserModel.findOne({email});
+
+        if(existEmail){
+            return res.status(400).json({
+                error:"Email already exists"
+            });
+        }
+
+
+        const hashedPassword = await bcrypt.hash(password,10);
+
+
+        const user = new UserModel({
+
+            username,
+            password:hashedPassword,
+            email
+
         });
 
-        // check for existing email
-        const existEmail = new Promise((resolve, reject) => {
-            UserModel.findOne({ email }, function(err, email){
-                if(err) reject(new Error(err))
-                if(email) reject({ error : "Please use unique Email"});
 
-                resolve();
-            })
+        await user.save();
+
+
+        return res.status(201).json({
+            msg:"User Register Successfully"
         });
 
 
-        Promise.all([existUsername, existEmail])
-            .then(() => {
-                if(password){
-                    bcrypt.hash(password, 10)
-                        .then( hashedPassword => {
-                            
-                            const user = new UserModel({
-                                username,
-                                password: hashedPassword,
-                                profile: profile || '',
-                                email
-                            });
+    }catch(error){
 
-                            // return save result as a response
-                            user.save()
-                                .then(result => res.status(201).send({ msg: "User Register Successfully"}))
-                                .catch(error => res.status(500).send({error}))
+        console.log(error);
 
-                        }).catch(error => {
-                            return res.status(500).send({
-                                error : "Enable to hashed password"
-                            })
-                        })
-                }
-            }).catch(error => {
-                return res.status(500).send({ error })
-            })
+        return res.status(500).json({
+            error:error.message
+        });
 
-
-    } catch (error) {
-        return res.status(500).send(error);
     }
 
 }
@@ -117,7 +119,7 @@ export async function login(req,res){
                         const token = jwt.sign({
                                         userId: user._id,
                                         username : user.username
-                                    }, ENV.JWT_SECRET , { expiresIn : "24h"});
+                                    }, process.env.JWT_SECRET , { expiresIn : "24h"});
 
                         return res.status(200).send({
                             msg: "Login Successful...!",

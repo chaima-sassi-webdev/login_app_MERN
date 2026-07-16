@@ -1,6 +1,5 @@
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-
+import { jwtDecode } from "jwt-decode";
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 
@@ -11,7 +10,7 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 export async function getUsername(){
     const token = localStorage.getItem('token')
     if(!token) return Promise.reject("Cannot find Token");
-    let decode = jwt_decode(token)
+    let decode = jwtDecode(token)
     return decode;
 }
 
@@ -37,18 +36,39 @@ export async function getUser({ username }){
 /** register user function */
 export async function registerUser(credentials){
     try {
-        const { data : { msg }, status } = await axios.post(`/api/register`, credentials);
+
+        console.log("Sending register request");
+
+        const { data : { msg }, status } = await axios.post(
+            `/api/register`, 
+            credentials
+        );
+
+        console.log("Register response:", status, msg);
+
 
         let { username, email } = credentials;
 
-        /** send email */
+
         if(status === 201){
-            await axios.post('/api/registerMail', { username, userEmail : email, text : msg})
+
+            console.log("Calling registerMail API");
+
+            await axios.post('/api/registerMail', { 
+                username, 
+                userEmail : email, 
+                text : msg
+            });
+
+            console.log("Mail API finished");
         }
 
-        return Promise.resolve(msg)
+
+        return Promise.resolve(msg);
+
     } catch (error) {
-        return Promise.reject({ error })
+        console.log("REGISTER ERROR:", error);
+        return Promise.reject({ error });
     }
 }
 

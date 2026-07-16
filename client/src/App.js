@@ -9,7 +9,7 @@ import Register from './components/auth/Register';
 import Profile from './components/auth/Profile';
 import Recovery from './components/auth/Recovery';
 import Reset from './components/auth/Reset';
-import PageNotFound from './components/PageNotFound';
+
 
 
 /** auth middleware */
@@ -40,11 +40,7 @@ const router = createBrowserRouter([
     {
         path : '/reset',
         element : <Reset></Reset>
-    },
-    {
-        path : '*',
-        element : <PageNotFound></PageNotFound>
-    },
+    }
 ])
 
 export default function App() {
